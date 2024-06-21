@@ -10,6 +10,8 @@ import Predmeti from "./komponente/predmeti/Predmeti";
 import Register from "./pages/register"; // 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ProtectedRoute from "./komponente/ProtectedRoute";
+
 function App() {
   const [molbe, setMolbe] = useState([]);
 
@@ -20,7 +22,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Pocetna />} />
           <Route path="/kontakt" element={<ContactForm molbe={molbe} setMolbe={setMolbe} />} />
-          <Route path="/molbe" element={<Molbe molbe={molbe} setMolbe={setMolbe} />} />
+          <Route 
+            path="/molbe" 
+            element={
+              <ProtectedRoute>
+                <Molbe molbe={molbe} setMolbe={setMolbe} />
+              </ProtectedRoute>
+            } 
+          />
           <Route path="/predmeti" element={<Predmeti />} />
           <Route path="/register" element={<Register />} />
         </Routes>
